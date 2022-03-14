@@ -10,7 +10,7 @@ attach(proportion_data)
 
 #Digitization Results (Wetland States) -------------------
 
-#Summary Data
+#Summary Statistics
 
 A<-filter(wetland_data,State=="A")
 B<-filter(wetland_data,State=="B")
@@ -18,11 +18,17 @@ C<-filter(wetland_data,State=="C")
 D<-filter(wetland_data,State=="D")
 E<-filter(wetland_data,State=="E")
 
-mean(A$Area_km)
-mean(B$Area_km)
-mean(C$Area_km)
-mean(D$Area_km)
-mean(E$Area_km)
+mean(A$Area_m)
+mean(B$Area_m)
+mean(C$Area_m)
+mean(D$Area_m)
+mean(E$Area_m)
+
+sd(A$Area_km)
+sd(B$Area_km)
+sd(C$Area_km)
+sd(D$Area_km)
+sd(E$Area_km)
 
 length(wetland_data$State)
 
@@ -113,7 +119,7 @@ plot(av3)
 shapiro.test(wetland_data$RdNBR_mean)
 bartlett.test(RdNBR_mean~State)
 kruskal.test(RdNBR_mean~State,data=wetland_data)
-dunnTest(RdNBR_mean ~ State,data=wetland_Data, method="bonferroni")
+dunnTest(RdNBR_mean ~ State,data=wetland_data, method="bonferroni")
 
 boxplot_3<-ggplot(wetland_data,aes(x=State,y=RdNBR_mean))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(y='Mean RdNBR', x="Successional Stage")+
