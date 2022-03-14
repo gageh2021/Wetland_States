@@ -1,5 +1,8 @@
 pacman::p_load(dplyr,ggplot2,ggpubr,FSA,RColorBrewer,here)
 
+#Please check that the working directory displays correctly using 'here()'.
+#It should show that the current directory ends with .../Wetland_States_Rpository
+
 wetland_data<-read.table(here("Data","Full_RS_data.csv"),header=T,sep=",")
 attach(wetland_data)
 proportion_data<-read.table(here("Data","Proportion_data.csv"),header=T,sep=",")
@@ -41,10 +44,10 @@ count(E)
 barplot_1<-ggplot(data=proportion_data, aes(x=State, y=Relative_Proportion))+
   geom_bar(stat="identity", fill="#98022e")+labs(y="Relative Frequency (%)",x="Successional Stage")+
   theme_classic()+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=17,colour='black'))
 barplot_1
 ggsave(filename = here("Figures","Barplot1_Frequency_State.png"))
@@ -61,10 +64,10 @@ dunnTest(Area_km ~ State,data=wetland_data, method="bonferroni")
 
 boxplot_1<-ggplot(wetland_data,aes(x=State,y=Area_km))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(y=expression(bold(paste('Wetland Area (km'^2*')'))), x="Successional Stage")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=17,colour='black'))+
   geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_1
@@ -81,10 +84,10 @@ dunnTest(Area_Proportion ~ State,data=wetland_data, method="bonferroni")
 
 boxplot_2<-ggplot(wetland_data,aes(x=State,y=Area_Proportion))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(y="Proportion of Total Area (%)", x="Successional Stage")+
-  theme(plot.title=element_text(size=16, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=15,face='bold'),  # X axis title
-        axis.title.y=element_text(size=15,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=16, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=15,face='bold'),  
+        axis.title.y=element_text(size=15,face='bold'),  
+        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=12,colour='black'))+
   geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_2
@@ -93,10 +96,10 @@ ggsave(filename = here("Figures","Boxplot2_Proportion_State.png"))
 barplot_2<-ggplot(data=proportion_data, aes(x=State, y=Area_Proportion_km))+
   geom_bar(stat="identity", fill="#98022e")+labs(y="Proportion of Total Area (%)",x="Successional Stage")+
   theme_classic()+
-  theme(plot.title=element_text(size=16, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=16, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=17,colour='black'))
 barplot_2
 ggsave(filename = here("Figures","Barplot2_Proportion_State.png"))
@@ -114,10 +117,10 @@ dunnTest(RdNBR_mean ~ State,data=wetland_Data, method="bonferroni")
 
 boxplot_3<-ggplot(wetland_data,aes(x=State,y=RdNBR_mean))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(y='Mean RdNBR', x="Successional Stage")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=17,colour='black'))+
   geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_3
@@ -134,10 +137,10 @@ dunnTest(RdNBR_SD ~ State,data=wetland_data, method="bonferroni")
 
 boxplot_4<-ggplot(wetland_data,aes(x=State,y=RdNBR_SD))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(y='Standard Deviation of RdNBR', x="Successional Stage")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=15,face='bold'),  # X axis title
-        axis.title.y=element_text(size=15,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=15,face='bold'),  
+        axis.title.y=element_text(size=15,face='bold'),  
+        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=12,colour='black'))+
   geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_4
@@ -154,11 +157,11 @@ dunnTest(RdNBR_max ~ State,data=wetland_data, method="bonferroni")
 
 boxplot_5<-ggplot(wetland_data,aes(x=State,y=RdNBR_max))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(y='Maximum RdNBR', x="Successional Stage")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=15,face='bold'),  # X axis title
-        axis.title.y=element_text(size=15,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  # X axis text
-        axis.text.y=element_text(size=12,colour='black'))+
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
+        axis.text.y=element_text(size=17,colour='black'))+
   geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_5
 ggsave(filename = here("Figures","Boxplot5_Max_RdNBR_State.png"))
@@ -172,14 +175,14 @@ bartlett.test(RdNBR_min~State)
 kruskal.test(RdNBR_min~State,data=wetland_data)
 dunnTest(RdNBR_min ~ State,data=wetland_data, method="bonferroni")
 
-boxplot_6<-ggplot(wetland_data,aes(x=State,y=RdNBR_min,colour=State))+geom_boxplot(notch=FALSE,outlier.shape = NA)+
+boxplot_6<-ggplot(wetland_data,aes(x=State,y=RdNBR_min))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(title="Successional State versus Minimum RdNBR Value", y='Minimum RdNBR Value', x="Successional Stage")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=15,face='bold'),  # X axis title
-        axis.title.y=element_text(size=15,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  # X axis text
-        axis.text.y=element_text(size=12,colour='black'))+
-  geom_jitter(alpha=0.7)
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
+        axis.text.y=element_text(size=17,colour='black'))+
+  geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_6
 ggsave(filename = here("Figures","Boxplot6_Min_RdNBR_State.png"))
 
@@ -193,10 +196,10 @@ cor1_np
 
 Mean_plot<-ggplot(wetland_data,aes(x=Area_km,y=RdNBR_mean,colour=State))+theme_classic()+geom_point(aes(shape=State))+geom_smooth(method='lm',se=FALSE)+
   scale_colour_manual(values=c('#3C0A0A','#7F0D30','#C10048','red','#F98484'))+labs(y='Mean RdNBR', x=expression(bold(paste('Wetland Area (km'^2*')'))))+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=17,colour='black'), legend.title = element_text(size = 13,face='bold'),
         legend.text = element_text(size=12),legend.position = c(0.85,0.9),legend.box.background = element_rect(colour = "black"))+scale_shape_manual(values=c(15, 1, 17, 0, 19))+
   labs(colour="Successional Stage",shape='Successional Stage')+guides(color = guide_legend(nrow = 2))
@@ -210,13 +213,15 @@ shapiro.test(wetland_data$RdNBR_SD)
 cor2_np<-cor.test(Area_km,RdNBR_SD,method="kendall")
 cor2_np
 
-St_dev_plot<-ggplot(wetland_data,aes(x=Area_km,y=RdNBR_SD,colour=State))+geom_point()+geom_smooth(method='lm',se=FALSE)+
-  labs(title="Wetland area versus Standard Deviation of RdNBR", y='Standard Deviation', x=expression(paste('Area (km'^2*')')))+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=15,face='bold'),  # X axis title
-        axis.title.y=element_text(size=15,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  # X axis text
-        axis.text.y=element_text(size=12,colour='black'))+xlim(0,0.3)
+St_dev_plot<-ggplot(wetland_data,aes(x=Area_km,y=RdNBR_SD,colour=State))+theme_classic()+geom_point()+geom_smooth(method='lm',se=FALSE)+
+  scale_colour_manual(name="Successional Stages",values=c('#3C0A0A','#7F0D30','#C10048','red','#F98484'))+
+  labs(y='Standard Deviation of RdNBR', x=expression(bold(paste('Wetland Area (km'^2*')'))))+
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),
+        axis.title.x=element_text(size=20,face='bold'), 
+        axis.title.y=element_text(size=20,face='bold'),
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),
+        axis.text.y=element_text(size=17,colour='black'), legend.title = element_text(size = 13,face='bold'),
+        legend.text = element_text(size=12),legend.position = c(0.85,0.8),legend.box.background = element_rect(colour = "black"))+xlim(0,0.3)+scale_shape_manual(name='Successional Stages',values=c(15, 1, 17, 0, 19))
 St_dev_plot
 ggsave(filename = here("Figures","Scatter2_SD_RdNBR_Area.png"))
 
@@ -228,10 +233,10 @@ cor3_np
 SD_Mean_plot<-ggplot(wetland_data,aes(x=RdNBR_mean,y=RdNBR_SD))+theme_classic()+geom_point(aes(colour=State,shape=State))+geom_smooth(method='lm',se=FALSE,colour="black")+
   scale_colour_manual(name="Successional Stage", values=c('#F98484','red','#C10048','#7F0D30','#3C0A0A'))+
   labs(y='Standard Deviation of RdNBR', x="Mean RdNBR")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=17,colour='black'),legend.title = element_text(size = 17,face='bold'),
         legend.text = element_text(size=15),legend.position = c(0.8,0.85),
         legend.box.background = element_rect(colour = "black"))+
@@ -245,12 +250,12 @@ Mean_density<-ggplot(data=wetland_data,aes(x=RdNBR_mean,colour=State,fill=State)
   geom_density(alpha=0.4)+scale_colour_manual(name="Successional Stage",values=c('#FFAD83','#FF5600','#C10048','#7F0D30','#3C0A0A'))+
 scale_fill_manual(name="Successional Stage", values=c('#FFAD83','#FF5600','#C10048','#7F0D30','#3C0A0A'))+
   labs(x="Mean RdNBR",y="Relative Frequency")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
         axis.ticks.y = element_blank(),
         axis.text.y = element_blank(),
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         legend.title = element_text(size = 17,face='bold'),
         legend.text = element_text(size=15),legend.position = c(0.85,0.85),
         legend.box.background = element_rect(colour = "black"))
@@ -273,10 +278,10 @@ TukeyHSD(av6_aov, conf.level=.95)
 
 boxplot_7<-ggplot(wetland_data,aes(x=State,y=NDWI_mean))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(y='Mean Pre-Fire NDWI', x="Successional Stage")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=17,colour='black'))+
   geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_7
@@ -293,10 +298,10 @@ TukeyHSD(av7_aov, conf.level=.95)
 
 boxplot_8<-ggplot(wetland_data,aes(x=State,y=NDWI_SD))+theme_classic()+geom_boxplot(notch=FALSE,outlier.shape = NA)+
   labs(y='Standard Deviation of Pre-Fire NDWI', x="Successional Stage")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=15,face='bold'),  # X axis title
-        axis.title.y=element_text(size=15,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=15,face='bold'),  
+        axis.title.y=element_text(size=15,face='bold'),  
+        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=12,colour='black'))+
   geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_8
@@ -309,10 +314,10 @@ cor4_np
 
 RdNBR_NDWI_plot<-ggplot(water_filtered,aes(x=NDWI_mean,y=RdNBR_mean))+theme_classic()+geom_point(alpha=0.7,colour='#98022e')+geom_smooth(method='lm',se=FALSE,colour='black')+
   labs(y='Mean RdNBR', x="Mean Pre-Fire NDWI")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
         axis.text.y=element_text(size=17,colour='black'))
 RdNBR_NDWI_plot
 ggsave(filename = here("Figures","Scatter4_Mean_RdNBR_Mean_NDWI.png"))
@@ -322,13 +327,13 @@ summary(cor6)
 cor6_np<-cor.test(RdNBR_mean,NDWI_SD,data=water_filtered,method="kendall")
 cor6_np
 
-RdNBR_NDWI_SD_plot<-ggplot(water_filtered,aes(x=NDWI_SD,y=RdNBR_mean))+geom_point()+geom_smooth(method='lm',se=FALSE)+
-  labs(title="Mean RdNBR versus Standard Deviation of Pre-Fire NDWI", y='Mean RdNBR', x="Standard Deviation of Pre-Fire NDWI")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=15,face='bold'),  # X axis title
-        axis.title.y=element_text(size=15,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  # X axis text
-        axis.text.y=element_text(size=12,colour='black'))
+RdNBR_NDWI_SD_plot<-ggplot(water_filtered,aes(x=NDWI_SD,y=RdNBR_mean))+theme_classic()+geom_point(alpha=0.7,colour='#98022e')+geom_smooth(method='lm',se=FALSE,colour='black')+
+  labs(y='Mean RdNBR', x="Standard Deviation of Pre-Fire NDWI")+
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
+        axis.title.x=element_text(size=20,face='bold'),  
+        axis.title.y=element_text(size=20,face='bold'),  
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  
+        axis.text.y=element_text(size=17,colour='black'))
 RdNBR_NDWI_SD_plot
 ggsave(filename = here("Figures","Scatter5_Mean_RdNBR_NDWI_SD.png"))
 
@@ -338,12 +343,12 @@ NDWI_density<-ggplot(data=wetland_data,aes(x=NDWI_mean,colour=State,fill=State))
   geom_density(alpha=0.4)+scale_colour_manual(name="Successional Stage",values=c('#FFAD83','#FF5600','#C10048','#7F0D30','#3C0A0A'))+
   scale_fill_manual(name="Successional Stage", values=c('#FFAD83','#FF5600','#C10048','#7F0D30','#3C0A0A'))+
   labs(x="Mean NDWI",y="Relative Frequency")+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  
         axis.ticks.y = element_blank(),
         axis.text.y = element_blank(),
-        axis.title.x=element_text(size=15,face='bold'),  # X axis title
-        axis.title.y=element_text(size=15,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  # X axis text
+        axis.title.x=element_text(size=15,face='bold'),  
+        axis.title.y=element_text(size=15,face='bold'),  
+        axis.text.x=element_text(size=12, vjust=.5,colour='black'),  
         legend.title = element_text(size = 13,face='bold'),
         legend.text = element_text(size=12),legend.position = c(0.85,0.85),
         legend.box.background = element_rect(colour = "black"))
