@@ -7,7 +7,49 @@ as.factor(State)
 proportion_data<-read.table(file.choose(),header=T,sep=",")
 attach(proportion_data)
 
-#Wetland Size versus State
+#Digitization Results (Wetland States) -------------------
+
+A<-filter(wetland_data,State=="A")
+B<-filter(wetland_data,State=="B")
+C<-filter(wetland_data,State=="C")
+D<-filter(wetland_data,State=="D")
+E<-filter(wetland_data,State=="E")
+
+mean(A$Area_km)
+mean(B$Area_km)
+mean(C$Area_km)
+mean(D$Area_km)
+mean(E$Area_km)
+
+length(wetland_data$State)
+
+sum(Area_km)
+sum(A$Area_km)
+sum(B$Area_km)
+sum(C$Area_km)
+sum(D$Area_km)
+sum(E$Area_km)
+
+count(A)
+count(B)
+count(C)
+count(D)
+count(E)
+
+#Relative Frequency
+
+barplot_1<-ggplot(data=proportion_data, aes(x=State, y=Relative_Proportion))+
+  geom_bar(stat="identity", fill="#98022e")+labs(y="Relative Frequency (%)",x="Successional Stage")+
+  theme_classic()+
+  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
+        axis.title.x=element_text(size=20,face='bold'),  # X axis title
+        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
+        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
+        axis.text.y=element_text(size=17,colour='black'))
+barplot_1
+
+#Wetland Area versus State
+
 av1<-lm(Area_km~State)
 anova(av1)
 par(mfrow=c(1,1))
@@ -45,42 +87,6 @@ boxplot_2<-ggplot(wetland_data,aes(x=State,y=Area_Proportion))+theme_classic()+g
   geom_jitter(alpha=0.7,colour='#98022e')
 boxplot_2
 
-A<-filter(wetland_data,State=="A")
-B<-filter(wetland_data,State=="B")
-C<-filter(wetland_data,State=="C")
-D<-filter(wetland_data,State=="D")
-E<-filter(wetland_data,State=="E")
-
-mean(A$Area_km)
-mean(B$Area_km)
-mean(C$Area_km)
-mean(D$Area_km)
-mean(E$Area_km)
-
-length(wetland_data$State)
-
-sum(Area_km)
-sum(A$Area_km)
-sum(B$Area_km)
-sum(C$Area_km)
-sum(D$Area_km)
-sum(E$Area_km)
-
-count(A)
-count(B)
-count(C)
-count(D)
-count(E)
-
-barplot_1<-ggplot(data=proportion_data, aes(x=State, y=Relative_Proportion))+
-  geom_bar(stat="identity", fill="#98022e")+labs(y="Relative Frequency (%)",x="Successional Stage")+
-  theme_classic()+
-  theme(plot.title=element_text(size=20, face="bold", hjust=0.5,lineheight=1.2),  # title
-        axis.title.x=element_text(size=20,face='bold'),  # X axis title
-        axis.title.y=element_text(size=20,face='bold'),  # Y axis title
-        axis.text.x=element_text(size=17, vjust=.5,colour='black'),  # X axis text
-        axis.text.y=element_text(size=17,colour='black'))
-barplot_1
 barplot_2<-ggplot(data=proportion_data, aes(x=State, y=Area_Proportion_km))+
   geom_bar(stat="identity", fill="#98022e")+labs(y="Proportion of Total Area (%)",x="Successional Stage")+
   theme_classic()+
@@ -91,8 +97,7 @@ barplot_2<-ggplot(data=proportion_data, aes(x=State, y=Area_Proportion_km))+
         axis.text.y=element_text(size=17,colour='black'))
 barplot_2
 
-
-#Burned versus unburned wetlands
+#Burn Severity -------------------
 
 av3<-lm(RdNBR_mean~State)
 anova(av3)
@@ -285,7 +290,7 @@ NDWI_density<-ggplot(data=wetland_data,aes(x=NDWI_mean,colour=State,fill=State))
         legend.box.background = element_rect(colour = "black"))
 NDWI_density
 
-#NDWI Plots
+#NDWI -------------------
 
 water_filtered<-filter(wetland_data,State!="E")
 water_filtered
